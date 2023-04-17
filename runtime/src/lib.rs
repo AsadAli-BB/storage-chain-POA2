@@ -288,6 +288,7 @@ impl pallet_timestamp::Config for Runtime {
 pub const EXISTENTIAL_DEPOSIT: u128 = 1 * currency::KILOWEI;
 
 impl pallet_balances::Config for Runtime {
+	
 	/// The type for recording an account's balance.
 	type Balance = Balance;
 	type DustRemoval = ();
@@ -299,6 +300,7 @@ impl pallet_balances::Config for Runtime {
 	type MaxLocks = ConstU32<50>;
 	type MaxReserves = ();
 	type ReserveIdentifier = [u8; 8];
+
 }
 
 parameter_types! {
