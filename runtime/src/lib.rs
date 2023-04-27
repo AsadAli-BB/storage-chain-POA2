@@ -1010,7 +1010,7 @@ mod tests {
 	fn check_whitelist() {
 		let whitelist: HashSet<String> = AllPalletsWithSystem::whitelisted_storage_keys()
 			.iter()
-			.map(|e| HexDisplay::from(&e.key).to_string())
+			.map(|e: &frame_benchmarking::TrackedStorageKey| HexDisplay::from(&e.key).to_string())
 			.collect();
 
 		// Block Number

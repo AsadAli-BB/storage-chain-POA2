@@ -29,23 +29,23 @@ fn get_from_secret<TPublic: Public>(seed: &str) -> <TPublic::Pair as Pair>::Publ
 		.public()
 }
 
-/// Helper function to generate an account ID from seed
-// fn get_account_id_from_secret<TPublic: Public>(seed: &str) -> AccountId
-// 	where
-// 		AccountPublic: From<<TPublic::Pair as Pair>::Public>,
-// {
-// 	AccountPublic::from(get_from_secret::<TPublic>(seed)).into_account()
-// }
+// / Helper function to generate an account ID from seed
+fn get_account_id_from_secret<TPublic: Public>(seed: &str) -> AccountId
+	where
+		AccountPublic: From<<TPublic::Pair as Pair>::Public>,
+{
+	AccountPublic::from(get_from_secret::<TPublic>(seed)).into_account()
+}
 
-/// Helper function to generate an authority key for Aura
-// fn get_authority_keys_from_secret(seed: &str) -> (AccountId, AuraId, GrandpaId) {
-// 	(
-// 		// get_account_id_from_secret::<ed25519::Public>(seed),
-// 		AccountId::from(hex!("f24FF3a9CF04c71Dbc94D0b566f7A27B94566cac")),
-// 		get_from_secret::<AuraId>(seed),
-// 		get_from_secret::<GrandpaId>(seed),
-// 	)
-// }
+// / Helper function to generate an authority key for Aura
+fn get_authority_keys_from_secret(seed: &str) -> (AccountId, AuraId, GrandpaId) {
+	(
+		// get_account_id_from_secret::<ed25519::Public>(seed),
+		AccountId::from(hex!("f24FF3a9CF04c71Dbc94D0b566f7A27B94566cac")),
+		get_from_secret::<AuraId>(seed),
+		get_from_secret::<GrandpaId>(seed),
+	)
+}
 
 fn session_keys(aura: AuraId, grandpa: GrandpaId) -> SessionKeys {
 	SessionKeys { aura, grandpa }
@@ -142,17 +142,16 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 				wasm_binary,
 				// Initial PoA authorities
 				vec![
-
-					(
-						array_bytes::hex_n_into_unchecked(ALITH),
-						get_from_secret::<AuraId>("//Alice"),
-						get_from_secret::<GrandpaId>("//Alice"),
-					),
-					(
-						array_bytes::hex_n_into_unchecked(BALTATHAR),
-						get_from_secret::<AuraId>("//Bob"),
-						get_from_secret::<GrandpaId>("//Bob"),
-					),
+					// (
+					// 	array_bytes::hex_n_into_unchecked(ALITH),
+					// 	get_from_secret::<AuraId>("//Alice"),
+					// 	get_from_secret::<GrandpaId>("//Alice"),
+					// ),
+					// (
+					// 	array_bytes::hex_n_into_unchecked(BALTATHAR),
+					// 	get_from_secret::<AuraId>("//Bob"),
+					// 	get_from_secret::<GrandpaId>("//Bob"),
+					// ),
 					// (
 					// 	array_bytes::hex_n_into_unchecked(CHARLETH),
 					// 	get_from_secret::<AuraId>("//Charlie"),
@@ -163,6 +162,19 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 					// 	get_from_secret::<AuraId>("//Dave"),
 					// 	get_from_secret::<GrandpaId>("//Dave"),
 					// ),
+					get_account_id_from_seed::<sr25519::Public>("Alice"),
+					get_account_id_from_seed::<sr25519::Public>("Bob"),
+					get_account_id_from_seed::<sr25519::Public>("Charlie"),
+					get_account_id_from_seed::<sr25519::Public>("Dave"),
+					get_account_id_from_seed::<sr25519::Public>("Eve"),
+					get_account_id_from_seed::<sr25519::Public>("Ferdie"),
+					get_account_id_from_seed::<sr25519::Public>("Alice//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Bob//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Charlie//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Dave//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Eve//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Ferdie//stash"),
+
 				],
 				// Sudo account
 				AccountId::from(hex!("B3C58D472c03CC571EbC97b42BDA4D38a83dF21D")),

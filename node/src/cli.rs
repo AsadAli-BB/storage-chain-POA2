@@ -23,7 +23,7 @@ pub enum Subcommand {
 
 	/// Export blocks.
 	ExportBlocks(sc_cli::ExportBlocksCmd),
-
+	
 	/// Export the state of a given block into a chain spec.
 	ExportState(sc_cli::ExportStateCmd),
 
