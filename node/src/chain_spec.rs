@@ -30,12 +30,12 @@ fn get_from_secret<TPublic: Public>(seed: &str) -> <TPublic::Pair as Pair>::Publ
 }
 
 // / Helper function to generate an account ID from seed
-fn get_account_id_from_secret<TPublic: Public>(seed: &str) -> AccountId
-	where
-		AccountPublic: From<<TPublic::Pair as Pair>::Public>,
-{
-	AccountPublic::from(get_from_secret::<TPublic>(seed)).into_account()
-}
+// fn get_account_id_from_secret<TPublic: Public>(seed: &str) -> AccountId
+// 	where
+// 		AccountPublic: From<<TPublic::Pair as Pair>::Public>,
+// {
+// 	AccountPublic::from(get_from_secret::<TPublic>(seed)).into_account()
+// }
 
 // / Helper function to generate an authority key for Aura
 fn get_authority_keys_from_secret(seed: &str) -> (AccountId, AuraId, GrandpaId) {
@@ -149,7 +149,7 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 					),
 					(
 						array_bytes::hex_n_into_unchecked(BALTATHAR),
-						get_from_secret::<AuraId>("//Bob"),
+						get_from_se	cret::<AuraId>("//Bob"),
 						get_from_secret::<GrandpaId>("//Bob"),
 					),
 					// (
