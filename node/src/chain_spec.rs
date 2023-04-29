@@ -30,12 +30,12 @@ fn get_from_secret<TPublic: Public>(seed: &str) -> <TPublic::Pair as Pair>::Publ
 }
 
 // / Helper function to generate an account ID from seed
-// fn get_account_id_from_secret<TPublic: Public>(seed: &str) -> AccountId
-// 	where
-// 		AccountPublic: From<<TPublic::Pair as Pair>::Public>,
-// {
-// 	AccountPublic::from(get_from_secret::<TPublic>(seed)).into_account()
-// }
+fn get_account_id_from_secret<TPublic: Public>(seed: &str) -> AccountId
+	where
+		AccountPublic: From<<TPublic::Pair as Pair>::Public>,
+{
+	AccountPublic::from(get_from_secret::<TPublic>(seed)).into_account()
+}
 
 // / Helper function to generate an authority key for Aura
 fn get_authority_keys_from_secret(seed: &str) -> (AccountId, AuraId, GrandpaId) {
@@ -66,16 +66,16 @@ const DOROTHY: &str = "0xC743FF582A879d9Ab1314c0c80ec5DaE66d39E0b";
 // const ETHAN: &str = "0xFf64d3F6efE2317EE2807d223a0Bdc4c0c49dfDB";
 
 /// Helper function to get an `AccountId` from an ECDSA Key Pair.
-// pub fn get_account_id_from_pair(pair: ecdsa::Pair) -> Option<AccountId> {
-// 	let decompressed = PublicKey::parse_slice(&pair.public().0, Some(PublicKeyFormat::Compressed))
-// 		.ok()?
-// 		.serialize();
-//
-// 	let mut m = [0u8; 64];
-// 	m.copy_from_slice(&decompressed[1..65]);
-//
-// 	Some(H160::from(H256::from_slice(Keccak256::digest(&m).as_slice())).into())
-// }
+pub fn get_account_id_from_pair(pair: ecdsa::Pair) -> Option<AccountId> {
+	let decompressed = PublicKey::parse_slice(&pair.public().0, Some(PublicKeyFormat::Compressed))
+		.ok()?
+		.serialize();
+
+	let mut m = [0u8; 64];
+	m.copy_from_slice(&decompressed[1..65]);
+
+	Some(H160::from(H256::from_slice(Keccak256::digest(&m).as_slice())).into())
+}
 
 pub fn development_config() -> Result<ChainSpec, String> {
 	let wasm_binary = WASM_BINARY.ok_or_else(|| "Development wasm not available".to_string())?;
