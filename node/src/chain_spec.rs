@@ -149,7 +149,7 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 					),
 					(
 						array_bytes::hex_n_into_unchecked(BALTATHAR),
-						get_from_se	cret::<AuraId>("//Bob"),
+						get_from_secret::<AuraId>("//Bob"),
 						get_from_secret::<GrandpaId>("//Bob"),
 					),
 					// (
